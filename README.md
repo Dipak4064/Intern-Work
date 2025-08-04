@@ -10,7 +10,7 @@ I am building simple and easy projects to gain hands-on experience and improve m
 - HTML, CSS
 
 ## 📁 Folder Structure
-- `/DailyActivity` – In this folder you can find the my activity according to my day activity.you read the summary of my work in readme.md file.
+- `/DailyActivity` – In this folder you can find the my activity according to my day activity. You can read the summary of my work in readme file.
 - `/DailyActivity/project` - You can find here the project from my learning. 
 - `/notes` – Any learning notes or documentation
 

@@ -6,12 +6,37 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="icon" type="image/x-icon" href="OIP.webp">
-    <!-- <base href="https://www.w3schools.com/" target="_blank"> -->
+    <title>Day One</title>
+    <link rel="icon" type="image/x-icon"
+        href="https://www.bing.com/th/id/OIP.xwX0SZFzAJQrwCobPwKm8gHaHa?w=187&h=211&c=8&rs=1&qlt=90&o=6&dpr=1.2&pid=3.1&rm=2">
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>   
-    
+
+<body>
+    <div class="lg-in-form">
+        <h3>Login</h3>
+        <p>Welcome Login to get amazing discounts and offers<br> only for you.</p>
+        <form action="/register.php" method="post">
+            <label for="username">username</label><br>
+            <input type="text" placeholder="enter username" id="username" name="usernmae"><br>
+
+            <label for="password">password</label><br>
+            <input type="password" id="password" name="password" placeholder="enter password" ><br>
+            <div id="recog">
+                <input type="checkbox" name="remember" id="remember">
+                <label for="remember">Remember me</label>
+            </div>
+            <input type="submit" value="LOGIN" id="lg-in-btn">
+            <div class="newuser">
+                <div class="signup">
+                    <p>New User?</p><a href="signup.html">SignUp</a>
+                </div>
+                <div class="frgpassword">
+                    <a href="forgot.html">Forgot password</a>
+                </div>
+            </div>
+        </form>
+    </div>
 </body>
 
 </html>
