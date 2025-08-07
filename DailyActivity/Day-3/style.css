@@ -1,0 +1,157 @@
+body {
+  margin: 0px;
+  padding: 0;
+}
+/*for dropdown navbar*/
+ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  background-color: #340d63;
+}
+li,
+a {
+  display: inline-block;
+  text-decoration: none;
+  color: white;
+  font-weight: 800;
+}
+li a {
+  padding: 10px 12px;
+}
+
+li:hover {
+  background-color: red;
+}
+
+.drop {
+  display: inline-block;
+}
+
+.drop-container {
+  display: none;
+  position: absolute;
+  background-color: white;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+}
+.drop-container a {
+  display: block;
+  min-width: 150px;
+  color: black;
+}
+.drop-container a:hover {
+  background-color: #f1f1f1;
+}
+
+.drop:hover .drop-container {
+  display: block;
+}
+
+/*for image gallary*/
+/* .img-gallary {
+  widt
+  height:100%;
+  border: 1px solid red;`
+  display: flex;
+} */
+.img-card {
+  width: 250px;
+  border: 1px solid black;
+  margin: 20px;
+  border-radius: 10px;
+  float:left;
+}
+.img-card p {
+  padding: 8px;
+  text-align: justify;
+}
+.img-card img {
+  width: 250px;
+  height: auto;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+
+.container {
+  border: 2px solid black;
+  height: 200px;
+  width: 70%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.box {
+  border: 6px solid red;
+  height: 100px;
+  width: 20%;
+}
+
+.inner-box {
+  border: 4px solid green;
+  height: 80px;
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dis-flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.dis-grid {
+  display: grid;
+  place-items: center;
+}
+
+.tbl-cell {
+  border: 4px solid green;
+  height: 80px;
+  width: 250px;
+  position: relative;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.z-container {
+  position: relative;
+}
+.black-box {
+  position: relative;
+  background-color: black;
+  height: 150px;
+  width: 80%;
+  color: white;
+  font-weight: 900;
+  align-content: center;
+  z-index: 1;
+}
+.green-box {
+  position: absolute;
+  top: 10px;
+  left: 80px;
+  height: 120px;
+  width: 60%;
+  z-index: 2;
+  color: white;
+  font-weight: 900;
+  align-content: center;
+  background-color: green;
+}
+
+.red-box {
+  position: absolute;
+  top: 10px;
+  left: 160px;
+  z-index: 3;
+  height: 100px;
+  width: 40%;
+  color: white;
+  font-weight: 900;
+  align-content: center;
+  background-color: red;
+}
