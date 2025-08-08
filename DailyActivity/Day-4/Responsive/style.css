@@ -19,8 +19,7 @@ nav ul {
   gap: 20px;
   list-style-type: none;
   background-color: rgb(51, 51, 51);
-    text-align: center;
-
+  text-align: center;
 }
 
 li a {
