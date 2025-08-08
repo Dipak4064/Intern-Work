@@ -1,0 +1,26 @@
+/*------------------------------------------------------------------*/
+body {
+  counter-reset: section;
+}
+h3 {
+  counter-reset: subsection;
+}
+
+h3::before {
+  counter-increment: section;
+  content: "section: " counter(section) " = ";
+}
+
+h4::before {
+  counter-increment: subsection;
+  content: "section:" counter(section) "." counter(subsection) " = ";
+}
+ol {
+  counter-reset: item;
+  list-style: none;
+}
+li::before {
+  counter-increment: item;
+  content: counters(item, ".") " ";
+}
+/*------------------------------------------------------------------*/
