@@ -1,0 +1,46 @@
+/* * {
+  margin: 0;
+  padding: 0;
+} */
+body {
+  text-align: center;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 120px;
+  width: 120px;
+  margin: 20px;
+  color: black;
+  font-size: large;
+  font-weight: 900;
+  cursor: pointer;
+  border: 4px solid black;
+  border-radius: 20px;
+}
+.green {
+  background-color: green;
+}
+.red {
+  background-color: red;
+}
+.yellow {
+  background-color: yellow;
+}
+.orange {
+  background-color: orange;
+}
+.gameflash {
+  background-color: #f1f1f1;
+}
+.userflash{
+    background-color: purple;
+}

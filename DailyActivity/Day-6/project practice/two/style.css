@@ -1,0 +1,84 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Poopins", sans-serif;
+  box-sizing: border-box;
+}
+body {
+  background-color: #222;
+}
+.card {
+  width: 90%;
+  max-width: 470px;
+  text-align: center;
+  background-image: linear-gradient(135deg, #00feba, #5b548a);
+  margin: 150px auto 0;
+  border-radius: 20px;
+  padding: 40px 35px;
+}
+
+.search-input {
+  padding: 25px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.search-input input {
+  height: 40px;
+  width: 85%;
+  border-radius: 20px;
+  padding-left: 20px;
+  border: none;
+  outline: none;
+  margin-right: 15px;
+  font-size: 18px;
+}
+
+button {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+button img {
+  width: 16px;
+}
+
+.wheather .wheather-icon {
+  height: 200px;
+  width: 200px;
+}
+.wheather h1 {
+  margin-bottom: 10px;
+}
+.wheather p {
+  font-size: 20px;
+}
+.temp {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 80px;
+}
+
+.temp img {
+  height: 50px;
+  width: 50px;
+}
+.humidity,
+.speed {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.error {
+  text-align: left;
+  margin-left: 10px;
+  font-size: 14px;
+  margin-top: 10px;
+  display: none;
+}
