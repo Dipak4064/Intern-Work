@@ -1,0 +1,50 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.p {
+  font-size: 50px;
+  margin-bottom: 100px;
+  display:none;
+}
+button {
+  height: 40px;
+  width: 150px;
+  padding: 10px;
+  font-size: 20px;
+  margin-top: 70px;
+  color: white;
+  font-weight: 700;
+  background-color: rgb(81, 81, 167);
+  border-radius: 10px;
+}
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+.container img {
+  height: 150px;
+  width: 150px;
+  margin-right: 25px;
+  border-radius: 50%;
+  margin-bottom: 90px;
+  box-sizing: border-box;
+}
+
+h1 {
+  background-color: violet;
+  padding: 10px;
+  border-radius: 20px;
+}
+.won {
+  background-color: green;
+  color: white;
+}
+.lost {
+  background-color: red;
+  color: white;
+}
