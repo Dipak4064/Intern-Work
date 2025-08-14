@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Generator</title>
+    <link rel="stylesheet" href="sttyle.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Generate a <br><span>Random Passowrd</span></h1>
+        <div class="input-field">
+            <input type="text" placeholder="Password">
+            <i class="fa-regular fa-copy"></i>
+        </div>
+        <div class="type">
+            <div class="row">
+                <label for="lowercase">Lowercase Characters</label>
+                <input type="checkbox" id="lowercase" name="lowercase">
+            </div>
+            <div class="row">
+                <label for="uppercase">Uppercase Characters</label>
+                <input type="checkbox" id="uppercase" name="uppercase">
+            </div>
+            <div class="row">
+                <label for="specialsymbol">Special Symbol</label>
+                <input type="checkbox" id="specialsymbol" name="specialsymbol">
+            </div>
+            <input type="range" min="2" max="12" id="slider">
+            <p>Password length <span>5</span> </p>
+            <button>Generate Password</button>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+
+</html>

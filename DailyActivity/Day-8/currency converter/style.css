@@ -20,8 +20,10 @@ input {
   height: 25px;
   width: 100%;
   outline: none;
+  border: 1px solid rgb(107, 104, 104);
   border-radius: 10px;
   margin-top: 5px;
+  padding-left: 10px;
 }
 h2 {
   margin-bottom: 25px;
@@ -30,6 +32,7 @@ h2 {
   display: flex;
   margin-top: 35px;
   justify-content: space-between;
+  align-items: center;
 }
 
 .country {

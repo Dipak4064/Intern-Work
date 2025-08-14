@@ -6,29 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Money Converter</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css">
 </head>
 
 <body>
     <div class="container">
         <h2>Money Converter</h2>
         <label for="amount">Enter Amount</label><br>
-        <input type="number" name="amount" place="Enter Amount">
+        <input type="number" name="amount" placeholder="Enter Amount here........">
         <div class="currency">
             <div>
                 <label for="from">From</label>
-                <div class="country">
-                    <img src="https://flagsapi.com/US/flat/64.png" alt="">
+                <div class="country from">
+                    <img src="https://flagsapi.com/US/flat/64.png" class="from-img">
                     <select name="from">
-                        <option value="usd">USD</option>
                     </select>
                 </div>
             </div>
+            <i class="fa-solid fa-arrow-right-arrow-left"></i>
             <div>
                 <label for="to">To</label>
-                <div class="country">
-                    <img src="https://flagsapi.com/NP/flat/64.png" alt="">
+                <div class="country to">
+                    <img src="https://flagsapi.com/IN/flat/64.png" class="to-img">
                     <select name="to">
-                        <option value="inr">INR</option>
                     </select>
                 </div>
             </div>

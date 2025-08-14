@@ -1,0 +1,88 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #00203a;
+}
+.container {
+  margin: 100px 100px;
+  padding: 20px;
+  width: 485px;
+  /* border: 2px solid white; */
+}
+h1 {
+  color: white;
+  margin-bottom: 40px;
+  padding-bottom: 20px;
+  font-size: 40px;
+}
+
+h1 span {
+  margin-top: 30px;
+  font-weight: 600;
+  color: #008350;
+  border-bottom: 3px solid #008350;
+  padding-bottom: 20px;
+}
+.input-field {
+  position: relative;
+  width: 80%;
+  margin-bottom:25px;
+}
+
+.input-field input {
+  height: 50px;
+  width: 450px;
+  padding: 20px 40px 20px 20px;
+  font-size: 20px;
+  border: none;
+  outline: none;
+  border-radius: 8px;
+  margin-bottom: 5px;
+}
+.input-field i {
+  position: absolute;
+  right:-93px;
+  top: 8px;
+  font-size: 30px;
+  color: black;
+  opacity:0.8;
+}
+i:hover{
+    cursor: pointer;
+}
+.type {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  font-size: 26px;
+  gap: 25px;
+}
+.type input[type="range"] {
+  width: 445px;
+}
+.row {
+  display: flex;
+  justify-content: space-between;
+}
+p {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+button {
+  font-size: 25px;
+  padding: 10px;
+  width: 260px;
+  text-align: left;
+  background-color: #008350;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  color: white;
+  font-weight: 500;
+}
