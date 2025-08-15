@@ -37,6 +37,7 @@ function gameflash(color) {
         btn.classList.remove("gameflash");
     }, 300);
 }
+
 function userflash(color) {
     let btn = document.querySelector(`#${color}`);
     btn.classList.add("userflash");

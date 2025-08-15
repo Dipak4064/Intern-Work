@@ -23,14 +23,17 @@ arr.forEach((button) => {
         } else if (e.target.innerHTML == "0") {
             if (cal > 0) {
                 result = "";
+                cal = 0;
             }
             result += e.target.innerHTML;
+            console.log(result);
             input.value = result;
 
         }
         else if (e.target.innerHTML == "1") {
             if (cal > 0) {
                 result = "";
+                cal = 0;
             }
             result += e.target.innerHTML;
             input.value = result;
@@ -38,6 +41,7 @@ arr.forEach((button) => {
         } else if (e.target.innerHTML == "2") {
             if (cal > 0) {
                 result = "";
+                cal = 0;
             }
             result += e.target.innerHTML;
             input.value = result;
@@ -45,6 +49,7 @@ arr.forEach((button) => {
         } else if (e.target.innerHTML == "3") {
             if (cal > 0) {
                 result = "";
+                cal = 0;
             }
             result += e.target.innerHTML;
             input.value = result;
@@ -52,6 +57,7 @@ arr.forEach((button) => {
         } else if (e.target.innerHTML == "4") {
             if (cal > 0) {
                 result = "";
+                cal = 0;
             }
             result += e.target.innerHTML;
             input.value = result;
@@ -59,6 +65,7 @@ arr.forEach((button) => {
         } else if (e.target.innerHTML == "5") {
             if (cal > 0) {
                 result = "";
+                cal = 0;
             }
             result += e.target.innerHTML;
             input.value = result;
@@ -73,6 +80,7 @@ arr.forEach((button) => {
         } else if (e.target.innerHTML == "7") {
             if (cal > 0) {
                 result = "";
+                cal = 0;
             }
             result += e.target.innerHTML;
             input.value = result;
@@ -87,6 +95,7 @@ arr.forEach((button) => {
         } else if (e.target.innerHTML == "9") {
             if (cal > 0) {
                 result = "";
+                cal = 0;
             }
             result += e.target.innerHTML;
             input.value = result;

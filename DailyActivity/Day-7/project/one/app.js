@@ -32,8 +32,8 @@ let winner = () => {
         let two = game[pattern[1]].innerText;
         let three = game[pattern[2]].innerText;
         console.log(pattern[0], pattern[1], pattern[2]);
-
         console.log(one, two, three);
+        
         if (one != "" && two != "" && three != "") {
             if (one == two && two == three) {
                 console.log("game win", one);

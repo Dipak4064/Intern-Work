@@ -20,22 +20,27 @@ li {
 .prev {
   left: 70px;
   width: 41px;
-  background: url("\\DailyActivity\\Day-4\\images\\sprites-image-css.jpeg") -47px 0;
+  background: url("\\DailyActivity\\Day-4\\images\\sprites-image-css.jpeg") -47px
+    0;
 }
 .next {
   left: 140px;
   width: 43px;
-  background: url("\\DailyActivity\\Day-4\\images\\sprites-image-css.jpeg") -91px 0;
+  background: url("\\DailyActivity\\Day-4\\images\\sprites-image-css.jpeg") -91px
+    0;
 }
 
 .home:hover {
-  background: Url("\\DailyActivity\\Day-4\\images\\sprites-image-css.jpeg") 0 41px;
+  background: Url("\\DailyActivity\\Day-4\\images\\sprites-image-css.jpeg") 0
+    41px;
 }
 .prev:hover {
-  background: Url("\\DailyActivity\\Day-4\\images\\sprites-image-css.jpeg") 87px 41px;
+  background: Url("\\DailyActivity\\Day-4\\images\\sprites-image-css.jpeg") 87px
+    41px;
 }
 .next:hover {
-  background: Url("\\DailyActivity\\Day-4\\images\\sprites-image-css.jpeg") 43px 41px;
+  background: Url("\\DailyActivity\\Day-4\\images\\sprites-image-css.jpeg") 43px
+    41px;
 }
 /*------------------------------------------------------------------*/
 

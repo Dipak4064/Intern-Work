@@ -8,10 +8,9 @@ body {
   background-color: #00203a;
 }
 .container {
-  margin: 100px 100px;
+  margin: 50px 100px;
   padding: 20px;
   width: 485px;
-  /* border: 2px solid white; */
 }
 h1 {
   color: white;
@@ -43,15 +42,15 @@ h1 span {
   border-radius: 8px;
   margin-bottom: 5px;
 }
-.input-field i {
+.input-field span {
   position: absolute;
-  right:-93px;
+  right:-90px;
   top: 8px;
-  font-size: 30px;
+  font-size: 32px;
   color: black;
   opacity:0.8;
 }
-i:hover{
+.input-field span:hover{
     cursor: pointer;
 }
 .type {
@@ -67,6 +66,11 @@ i:hover{
 .row {
   display: flex;
   justify-content: space-between;
+}
+.row input{
+  height:25px;
+  width:25px;
+  color:red;
 }
 p {
   display: flex;
