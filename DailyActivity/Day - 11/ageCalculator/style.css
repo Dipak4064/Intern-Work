@@ -1,0 +1,47 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poopins", sans-serif;
+}
+body {
+  background-image: linear-gradient(90deg, #471bb5, #6f8ac7);
+}
+.container {
+  margin: 150px 180px;
+}
+h1 {
+  font-size: 50px;
+  line-height: 70px;
+}
+.date-field {
+  width: 520px;
+  height: 100px;
+  margin-top: 40px;
+  padding: 20px;
+  background-color: #8f89d6;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 10px;
+  margin-bottom: 30px;
+}
+.date-field input {
+  height: 40px;
+  width: 350px;
+  font-size: 20px;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+}
+
+.date-field button {
+  font-size: 20px;
+  padding: 8px;
+  font-weight: 500;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  background-color: #f2e96d;
+}

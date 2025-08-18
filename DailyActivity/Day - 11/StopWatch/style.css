@@ -1,0 +1,35 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid green;
+  width:400px;
+  padding:40px;
+  gap:50px;
+  text-align: center;
+  background-image: linear-gradient(135deg,rgb(102, 102, 98),rgb(65, 71, 54));
+  margin:0 auto;
+  margin-top:270px;
+  border-radius: 20px;
+}
+.container h1{
+    font-size:80px;
+    color:white;
+}
+.icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap:50px;
+    font-size:50px;
+    color:white;
+}
+.icon i:hover{
+    cursor: pointer;
+}
