@@ -1,10 +1,6 @@
-const CreatingItem = ({foodlist}) => {
-  console.log(foodlist);
-  return (
-    <li className="list-group-item" >
-      {foodlist}
-    </li>
-  );
+import styles from "./CreatingItem.module.css";
+const CreatingItem = ({ foodlist }) => {
+  return <li className={`${styles["list"]} list-group-item`}>{foodlist}</li>;
 };
 
 export default CreatingItem;

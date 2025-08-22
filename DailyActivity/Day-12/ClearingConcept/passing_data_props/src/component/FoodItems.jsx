@@ -1,10 +1,12 @@
 import CreatingItem from "./CreatingItem";
+import "../App.css";
+import styles from "./CreatingItem.module.css";
 
 let FoodItems = ({ items }) => {
   return (
-    <ul className="list-group">
+    <ul className={`${styles["item"]}`}>
       {items.map((item) => {
-          return <CreatingItem key={item} foodlist={item} ></CreatingItem>;
+        return <CreatingItem key={item} foodlist={item}></CreatingItem>;
       })}
     </ul>
   );
