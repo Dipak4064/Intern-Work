@@ -1,0 +1,10 @@
+.container{
+    width:50%;
+    border:2px solid black;
+    margin:10px auto;
+    padding:15px;
+    min-width: 400px;
+}
+h5{
+    font-weight: 500;
+}

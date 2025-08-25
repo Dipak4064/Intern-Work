@@ -2,7 +2,7 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import AddItem from "./component/addItem";
 import TodoHeading from "./component/todoHeading";
-import TodoItems from "./TodoItems";
+import TodoItems from "./component/TodoItems";
 function App() {
   const list = [
     {

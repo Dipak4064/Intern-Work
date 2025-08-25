@@ -1,4 +1,4 @@
-import TodoItem from "./component/TodoItem";
+import TodoItem from "./TodoItem";
 function TodoItems({ list }) {
   return (
     <>
