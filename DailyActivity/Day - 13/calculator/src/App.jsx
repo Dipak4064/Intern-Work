@@ -26,8 +26,15 @@ function App() {
   let [calVal, setVal] = useState("");
 
   const getVal = (item) => {
-    let newVal = calVal + item;
-    setVal(newVal);
+    if (item === "c") {
+      setVal("");
+    } else if (item === "=") {
+      const result = eval(calVal);
+      setVal(result);
+    } else {
+      let newVal = calVal + item;
+      setVal(newVal);
+    }
   };
   return (
     <div className="container">
