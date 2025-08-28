@@ -6,21 +6,8 @@ import TodoItems from "./component/TodoItems";
 import WelcomeMessage from "./component/WelcomeMessage";
 import { TodoItemContext } from "./store/items-store";
 import { useState } from "react";
+
 function App() {
-  // const list = [
-  //   {
-  //     name: "Buy Milk",
-  //     date: "2023/11/3",
-  //   },
-  //   {
-  //     name: "Go To College",
-  //     date: "2045/11/2",
-  //   },
-  //   {
-  //     name: "Buy Vegetable",
-  //     date: "2020/12/12",
-  //   },
-  // ];
   let [items, setItems] = useState([]);
   const getNewItem = (item, date) => {
     setItems((currValue) => [...currValue, { name: item, date: date }]);
@@ -31,12 +18,14 @@ function App() {
     setItems(newItemList);
   };
   return (
-    <TodoItemContext.Provider value={items}>
+    <TodoItemContext.Provider
+      value={{ items: items, getNewItem: getNewItem, deleteItem: deleteItem }}
+    >
       <center>
         <TodoHeading />
-        <AddItem passItem={getNewItem}></AddItem>
-        {<WelcomeMessage items={items}></WelcomeMessage>}
-        <TodoItems list={items} deleteItem={deleteItem}></TodoItems>
+        <AddItem ></AddItem>
+        <WelcomeMessage ></WelcomeMessage>
+        <TodoItems></TodoItems>
       </center>
     </TodoItemContext.Provider>
   );

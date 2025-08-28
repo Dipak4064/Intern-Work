@@ -1,2 +1,6 @@
-import { createContext } from "react"
-export const TodoItemContext = createContext([]);
+import { createContext } from "react";
+export const TodoItemContext = createContext({
+  items: [],
+  getNewItem: () => {},
+  deleteItem: () => {},
+});
