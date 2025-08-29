@@ -1,0 +1,103 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  /* background-color: grey; */
+}
+.navbar {
+  background-color: rgb(90, 90, 209);
+  align-items: center;
+  justify-content: space-around;
+  padding: 10px;
+  display: flex;
+  gap: 100px;
+  color: white;
+}
+.logo h2 {
+  font-size: 30px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.navbar ul {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  list-style: none;
+  gap: 60px;
+  padding: 0;
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.account {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.account button {
+  padding: 10px 15px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+.img {
+  height: 40px;
+  width: 40px;
+  background-color: white;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.content {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 10px 20px;
+  gap: 20px;
+  width:370px;
+  border-radius: 20px;
+  box-shadow:0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.content:hover{
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+.content img {
+  height: 400px;
+  width: 370px;
+  background-size: cover;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  margin-bottom: 10px;
+}
+.des{
+    padding:10px;
+}
+.content p {
+    margin-top: 10px;
+  background-color: white;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+.content button {
+    margin-top: 2px;
+    background-color: rgb(61, 61, 184);
+    color: white;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-weight: 600;
+    gap:20px
+}
+.content button:hover{
+    background-color: rgb(86, 86, 154);
+}
+.content .btn {
+    display: flex;
+   justify-content: space-between;
+   align-items: center;
+   padding:20px;
+}
