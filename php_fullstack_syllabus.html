@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive PHP Fullstack Syllabus</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Scholarly Neutrals -->
+    <!-- Application Structure Plan: The syllabus is transformed into an interactive dashboard. A tab-based navigation allows users to switch between weekly modules and a final capstone section. This structure is intuitive for a time-based plan. Within each week, topics are presented in an accordion format, allowing users to drill down into details without being overwhelmed. A dynamic donut chart visualizes the key learning focus for each week, providing an immediate, data-driven summary. This design turns a static document into an engaging, self-paced exploration tool, enhancing usability by organizing content hierarchically and visually. -->
+    <!-- Visualization & Content Choices: 
+        - Weekly Modules -> Goal: Organize -> Method: Tabbed Navigation -> Interaction: Click to switch content -> Justification: Standard, user-friendly pattern for segmented content.
+        - Weekly Topics -> Goal: Organize -> Method: Accordion List (HTML/JS) -> Interaction: Click to expand/collapse subtopics -> Justification: Prevents information overload and creates a clean layout.
+        - Weekly Focus -> Goal: Inform/Compare -> Method: Donut Chart (Chart.js/Canvas) -> Interaction: Chart updates automatically on week selection -> Justification: Visually represents the proportional focus of each week's curriculum, making it easy to grasp key learning areas at a glance.
+        - Assignments/Projects -> Goal: Inform -> Method: Styled Cards (HTML/Tailwind) -> Interaction: Static display with clear visual separation -> Justification: Modern UI pattern that makes action items stand out.
+        - CONFIRMING NO SVG/Mermaid. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FDFBF8;
+            color: #383838;
+        }
+        .tab-active {
+            background-color: #4A5568;
+            color: #FFFFFF;
+            border-color: #4A5568;
+        }
+        .tab-inactive {
+            background-color: #E2E8F0;
+            color: #4A5568;
+        }
+        .accordion-header {
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+         @media (min-width: 768px) { .chart-container { height: 350px; } }
+    </style>
+</head>
+<body class="antialiased">
+    <div class="container mx-auto p-4 md:p-8 max-w-7xl">
+        <header class="text-center mb-8 md:mb-12">
+            <h1 class="text-3xl md:text-5xl font-bold text-gray-800">1-Month PHP Fullstack Roadmap</h1>
+            <p class="mt-4 text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">An interactive guide for learners with HTML, CSS, and JavaScript knowledge to become job-ready PHP developers.</p>
+        </header>
+
+        <nav id="tabs" class="flex flex-wrap justify-center gap-2 md:gap-4 mb-8">
+            <button data-target="week1" class="tab tab-active text-sm md:text-base font-semibold py-2 px-4 rounded-full transition-colors duration-300">Week 1: Foundation</button>
+            <button data-target="week2" class="tab tab-inactive text-sm md:text-base font-semibold py-2 px-4 rounded-full transition-colors duration-300">Week 2: OOP & Databases</button>
+            <button data-target="week3" class="tab tab-inactive text-sm md:text-base font-semibold py-2 px-4 rounded-full transition-colors duration-300">Week 3: Advanced Topics</button>
+            <button data-target="week4" class="tab tab-inactive text-sm md:text-base font-semibold py-2 px-4 rounded-full transition-colors duration-300">Week 4: Fullstack & APIs</button>
+            <button data-target="capstone" class="tab tab-inactive text-sm md:text-base font-semibold py-2 px-4 rounded-full transition-colors duration-300">Capstone Projects</button>
+        </nav>
+
+        <main id="content-container">
+            <!-- Content sections will be injected here by JavaScript -->
+        </main>
+    </div>
+
+    <script>
+        const syllabusData = {
+            week1: {
+                title: "The PHP Foundation",
+                intro: "This foundational week introduces you to the core syntax and concepts of PHP. You'll set up your development environment and learn how to handle data from web forms, building the essential skills needed for any dynamic website.",
+                chartData: {
+                    labels: ['PHP Fundamentals', 'Server Environment', 'Control Structures', 'Form Handling'],
+                    data: [40, 15, 25, 20],
+                    colors: ['#63B3ED', '#F6E05E', '#9F7AEA', '#68D391']
+                },
+                topics: [
+                    { 
+                        title: "PHP Fundamentals", 
+                        content: `<strong>Subtopics:</strong> Introduction to PHP, setting up a local server (XAMPP/MAMP/WAMP), PHP tags, and basic syntax.<br><br>
+                                   <strong>Assignment:</strong> Set up a local development environment and create a "Hello, World!" PHP script.`,
+                        icon: '&#128206;' 
+                    },
+                    { 
+                        title: "Web Server Environment", 
+                        content: `<strong>Subtopics:</strong> Understanding the request-response cycle, how PHP works with the web server.`,
+                        icon: '&#128736;' 
+                    },
+                    { 
+                        title: "PHP Data Types and Variables", 
+                        content: `<strong>Subtopics:</strong> Scalar types (string, int, float, bool), compound types (array, object), and special types (resource, null). Variable declaration and scope.`,
+                        icon: '&#128176;' 
+                    },
+                    { 
+                        title: "Control Structures & Functions", 
+                        content: `<strong>Subtopics:</strong> Conditionals (if/else, switch), loops (for, while, do-while, foreach). Creating and calling user-defined functions, function parameters, and return values.`,
+                        icon: '&#129518;' 
+                    },
+                    {
+                        title: "Superglobals and Form Handling",
+                        content: `<strong>Subtopics:</strong> Using \`$_GET\` and \`$_POST\` to handle form data, basic validation, and sanitization.<br><br>
+                                   <strong>Practical Assignments:</strong><br>
+                                   1. <strong>PHP Calculator:</strong> Create a web-based calculator that takes two numbers and an operator from a form and displays the result.<br>
+                                   2. <strong>User Registration Form:</strong> Build a registration form that validates user input and displays a success or error message.`,
+                        icon: '&#128221;'
+                    }
+                ]
+            },
+            week2: {
+                title: "Object-Oriented PHP and Database Integration",
+                intro: "In week two, you'll transition to more professional coding practices with Object-Oriented Programming (OOP). You'll also connect your applications to a database, learning to store, retrieve, and manage data effectively.",
+                chartData: {
+                    labels: ['OOP Concepts', 'Database Basics', 'PHP-MySQL (PDO)', 'CRUD'],
+                    data: [35, 20, 25, 20],
+                    colors: ['#63B3ED', '#F6E05E', '#9F7AEA', '#68D391']
+                },
+                topics: [
+                    {
+                        title: "Object-Oriented Programming (OOP) in PHP",
+                        content: `<strong>Subtopics:</strong> Classes, objects, properties, methods, constructors, public/private/protected access modifiers, inheritance, and polymorphism.`,
+                        icon: '&#128187;'
+                    },
+                    {
+                        title: "Introduction to Databases (MySQL/MariaDB)",
+                        content: `<strong>Subtopics:</strong> Relational databases, tables, columns, rows, SQL basics (SELECT, INSERT, UPDATE, DELETE).`,
+                        icon: '&#128421;'
+                    },
+                    {
+                        title: "PHP and MySQL Interaction (PDO)",
+                        content: `<strong>Subtopics:</strong> Setting up a database, connecting PHP to the database using the PHP Data Objects (PDO) extension for secure communication.`,
+                        icon: '&#128279;'
+                    },
+                    {
+                        title: "CRUD Operations",
+                        content: `<strong>Subtopics:</strong> Creating a database-driven application to perform Create, Read, Update, and Delete operations on a single table.<br><br>
+                                   <strong>Practical Assignments:</strong><br>
+                                   1. <strong>Simple Task List App:</strong> Build an application to manage tasks. All data should be stored in a MySQL database.<br>
+                                   2. <strong>Refactor to OOP:</strong> Refactor the Task List app using an OOP approach, separating database logic into a dedicated class.`,
+                        icon: '&#128230;'
+                    }
+                ]
+            },
+            week3: {
+                title: "Advanced PHP, Security, and Session Management",
+                intro: "This week focuses on building robust and secure applications. You will learn how to handle errors gracefully, protect against common web vulnerabilities, and manage user sessions to create personalized experiences.",
+                chartData: {
+                    labels: ['Error Handling', 'Security', 'Sessions & Cookies', 'File Systems', 'Composer'],
+                    data: [15, 35, 25, 15, 10],
+                    colors: ['#63B3ED', '#F6E05E', '#9F7AEA', '#68D391', '#F56565']
+                },
+                topics: [
+                    {
+                        title: "PHP Error Handling",
+                        content: `<strong>Subtopics:</strong> Using try...catch blocks for exceptions, setting up a custom error handler.`,
+                        icon: '&#9888;'
+                    },
+                    {
+                        title: "Security Best Practices",
+                        content: `<strong>Subtopics:</strong> SQL injection prevention (using prepared statements with PDO), Cross-Site Scripting (XSS) prevention (htmlspecialchars), password hashing (password_hash, password_verify).`,
+                        icon: '&#128737;'
+                    },
+                    {
+                        title: "Session and Cookie Management",
+                        content: `<strong>Subtopics:</strong> \`session_start()\`, \`$_SESSION\` superglobal, managing user authentication and state across multiple pages.<br><br>
+                                   <strong>Practical Assignment:</strong><br>
+                                   1. <strong>Secure User Login System:</strong> Add a secure login/logout system to your Task List app.`,
+                        icon: '&#128272;'
+                    },
+                    {
+                        title: "File Uploads and File System Operations",
+                        content: `<strong>Subtopics:</strong> Handling \`$_FILES\`, basic validation (file size, type), and securely moving uploaded files.<br><br>
+                                   <strong>Practical Assignment:</strong><br>
+                                   1. <strong>Profile Picture Upload:</strong> Allow users to upload a profile picture.`,
+                        icon: '&#128194;'
+                    },
+                    {
+                        title: "Autoloading and Composer",
+                        content: `<strong>Subtopics:</strong> Introduction to Composer as a dependency manager. Using \`spl_autoload_register\` and Composer's autoloader for a cleaner codebase.`,
+                        icon: '&#128230;'
+                    }
+                ]
+            },
+            week4: {
+                title: "The Fullstack Experience: APIs, Routing, and Capstone Project",
+                intro: "In the final week, you'll bring everything together by building a modern, full-stack application. You'll create a REST API, manage application routing for clean URLs, and integrate it with a dynamic JavaScript front-end.",
+                chartData: {
+                    labels: ['APIs & REST', 'Routing', 'Frontend Integration', 'Deployment'],
+                    data: [40, 20, 30, 10],
+                    colors: ['#63B3ED', '#F6E05E', '#9F7AEA', '#68D391']
+                },
+                topics: [
+                    {
+                        title: "Introduction to APIs and REST",
+                        content: `<strong>Subtopics:</strong> Understanding what an API is, the principles of REST, and the use of JSON for data exchange.`,
+                        icon: '&#128226;'
+                    },
+                    {
+                        title: "Building a Simple REST API with PHP",
+                        content: `<strong>Subtopics:</strong> Creating endpoints for CRUD operations (GET, POST, PUT, DELETE).`,
+                        icon: '&#128295;'
+                    },
+                    {
+                        title: "Routing for Clean URLs",
+                        content: `<strong>Subtopics:</strong> Implementing a simple router to handle URL requests and map them to the correct PHP files or functions, creating clean URLs (e.g., /tasks/1 instead of task.php?id=1).`,
+                        icon: '&#128337;'
+                    },
+                    {
+                        title: "Modern Front-end Integration",
+                        content: `<strong>Subtopics:</strong> Using JavaScript (fetch API or axios) to interact with your PHP backend API.<br><br>
+                                   <strong>Practical Assignment:</strong><br>
+                                   1. <strong>Fullstack SPA:</strong> Create a single-page task management application that uses a RESTful PHP API for all data operations.`,
+                        icon: '&#128161;'
+                    },
+                    {
+                        title: "Project Deployment & Maintenance",
+                        content: `<strong>Subtopics:</strong> Basic concepts of deploying a PHP application to a live server, understanding file permissions, and environment variables.`,
+                        icon: '&#128640;'
+                    }
+                ]
+            },
+            capstone: {
+                isCapstone: true,
+                title: "Capstone Project Ideas for Your Portfolio",
+                intro: "Choose one of these real-world project ideas to build out for your portfolio. These projects integrate all the skills you've learned and are designed to impress potential employers by showcasing your ability to create a complete, functional web application.",
+                projects: [
+                    { 
+                        title: "Job Board / Resume Portal", 
+                        description: "A full-stack application where users can post job listings and job seekers can upload resumes. Features user registration, authentication, different user roles, and CRUD operations.",
+                        skills: ["Authentication", "File Uploads", "CRUD", "User Roles"]
+                    },
+                    { 
+                        title: "Basic E-commerce Store", 
+                        description: "A web store where users can browse products, add items to a shopping cart, and view their order history. Involves a product database, session management for the cart, and secure data handling.",
+                        skills: ["Session Management", "Database Design", "CRUD"]
+                    },
+                    { 
+                        title: "Real-time Chat Application", 
+                        description: "A single-page chat app where users can send messages in real-time. This challenging project requires frequent database polling or WebSockets and showcases real-time data handling.",
+                        skills: ["APIs", "JavaScript", "Real-Time Polling", "Authentication"]
+                    },
+                    { 
+                        title: "Task Management / Project Planner", 
+                        description: "An advanced task manager where users can create projects, add tasks with due dates, assign tasks to others, and track project progress.",
+                        skills: ["OOP", "Complex Database", "User Permissions", "CRUD"]
+                    }
+                ]
+            }
+        };
+
+        const contentContainer = document.getElementById('content-container');
+        const tabs = document.querySelectorAll('.tab');
+        let currentChart = null;
+        
+        const renderContent = (weekKey) => {
+            const data = syllabusData[weekKey];
+            let html = '';
+
+            if (data.isCapstone) {
+                html = `
+                    <div id="${weekKey}" class="tab-content bg-white p-6 md:p-8 rounded-lg shadow-md">
+                        <h2 class="text-2xl md:text-3xl font-bold mb-4 text-gray-800">${data.title}</h2>
+                        <p class="mb-8 text-gray-600">${data.intro}</p>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            ${data.projects.map(p => `
+                                <div class="bg-gray-50 border border-gray-200 rounded-lg p-6">
+                                    <h3 class="font-bold text-xl mb-2 text-gray-700">${p.title}</h3>
+                                    <p class="text-gray-600 mb-4">${p.description}</p>
+                                    <div class="flex flex-wrap gap-2">
+                                        ${p.skills.map(s => `<span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">${s}</span>`).join('')}
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>`;
+            } else {
+                html = `
+                    <div id="${weekKey}" class="tab-content">
+                        <div class="text-center mb-8">
+                             <h2 class="text-2xl md:text-3xl font-bold mb-2 text-gray-800">${data.title}</h2>
+                             <p class="text-gray-600 max-w-3xl mx-auto">${data.intro}</p>
+                        </div>
+                        <div class="grid lg:grid-cols-5 gap-8 items-start">
+                            <div class="lg:col-span-3 bg-white p-6 rounded-lg shadow-md">
+                                <h3 class="font-bold text-xl mb-4 text-gray-700">Weekly Topics</h3>
+                                <div class="space-y-4" id="accordion-container">
+                                ${data.topics.map((topic, index) => `
+                                    <div class="border border-gray-200 rounded-lg">
+                                        <div class="accordion-header bg-gray-50 hover:bg-gray-100 p-4 flex justify-between items-center rounded-t-lg">
+                                            <div class="flex items-center">
+                                                <span class="text-xl mr-3">${topic.icon}</span>
+                                                <span class="font-semibold text-gray-700">${topic.title}</span>
+                                            </div>
+                                            <span class="transform transition-transform duration-300">&#9662;</span>
+                                        </div>
+                                        <div class="accordion-content">
+                                            <div class="p-4 border-t border-gray-200 text-gray-600">
+                                                ${topic.content}
+                                            </div>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                                </div>
+                            </div>
+                            <div class="lg:col-span-2 bg-white p-6 rounded-lg shadow-md">
+                                 <h3 class="font-bold text-xl mb-4 text-center text-gray-700">Learning Focus</h3>
+                                 <div class="chart-container">
+                                    <canvas id="weekChart"></canvas>
+                                 </div>
+                            </div>
+                        </div>
+                    </div>`;
+            }
+            contentContainer.innerHTML = html;
+            
+            if (!data.isCapstone) {
+                setupAccordions();
+                renderChart(data.chartData);
+            }
+        };
+        
+        const renderChart = (chartData) => {
+            if (currentChart) {
+                currentChart.destroy();
+            }
+            const ctx = document.getElementById('weekChart').getContext('2d');
+            currentChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: chartData.labels,
+                    datasets: [{
+                        data: chartData.data,
+                        backgroundColor: chartData.colors,
+                        borderColor: '#FDFBF8',
+                        borderWidth: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '60%',
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                padding: 15,
+                                font: {
+                                    size: 14
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        };
+
+        const setupAccordions = () => {
+            const accordions = document.querySelectorAll('.accordion-header');
+            accordions.forEach(accordion => {
+                accordion.addEventListener('click', () => {
+                    const content = accordion.nextElementSibling;
+                    const arrow = accordion.querySelector('span:last-child');
+                    const isOpen = content.style.maxHeight;
+
+                    if (isOpen) {
+                        content.style.maxHeight = null;
+                        arrow.style.transform = 'rotate(0deg)';
+                    } else {
+                        content.style.maxHeight = content.scrollHeight + 'px';
+                        arrow.style.transform = 'rotate(180deg)';
+                    }
+                });
+            });
+        };
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const target = tab.dataset.target;
+                tabs.forEach(t => {
+                    t.classList.remove('tab-active');
+                    t.classList.add('tab-inactive');
+                });
+                tab.classList.remove('tab-inactive');
+                tab.classList.add('tab-active');
+                renderContent(target);
+            });
+        });
+
+        // Initial render
+        renderContent('week1');
+    </script>
+</body>
+</html>
