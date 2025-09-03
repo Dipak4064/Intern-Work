@@ -5,19 +5,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     include "template/_dbconnect.php";
     $username = $_POST['username'];
     $password = $_POST['password'];
+    $hash = password_hash($password, PASSWORD_DEFAULT);
 
-    $sql = "select * from data where username = '$username' AND password = '$password'";
+    $sql = "select * from data where username = '$username' ";
     $result = mysqli_query($conn, $sql);
     if ($result) {
         $num = mysqli_num_rows($result);
         if ($num == 1) {
-            $login = true;
-            session_start();
-            $_SESSION['logedin'] = true;
-            $_SESSION['username'] = $username;
-            header("Location: ./welcome.php");
+            while ($row = mysqli_fetch_assoc($result)) {
+                if (password_verify($password, $row['password'])) {
+                    $login = true;
+                    session_start();
+                    $_SESSION['logedin'] = true;
+                    $_SESSION['username'] = $username;
+                    header("Location: ./welcome.php");
+                } else {
+                    $showError = "Invalid Password Credentials.";
+                }
+            }
         } else {
-            $showError = "Invalid credentials.";
+            $showError = "Invalid Username Credentials.";
         }
     } else {
         $showError = "SQL Error: " . mysqli_error($conn);

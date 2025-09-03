@@ -13,7 +13,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $showError = "User name already exist";
     } else {
         if ($password == $cpassword) {
-            $sql = "INSERT INTO data (username, password, created_at) VALUES ('$username', '$password', current_timestamp())";
+            $hash = password_hash($password, PASSWORD_DEFAULT);
+            $sql = "INSERT INTO data (username, password, created_at) VALUES ('$username', '$hash', current_timestamp())";
             $result = mysqli_query($conn, $sql);
             if ($result) {
                 $showAlert = true;
@@ -57,11 +58,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <form action="./signup.php" method="POST">
             <div class="mb-3">
                 <label for="username" class="form-label">User Name</label>
-                <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp">
+                <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp"
+                    maxlength="12">
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" name="password">
+                <input type="password" class="form-control" id="password" name="password" maxlength="16">
             </div>
             <div class="mb-3">
                 <label for="cpassword" class="form-label">Confirm Password</label>
