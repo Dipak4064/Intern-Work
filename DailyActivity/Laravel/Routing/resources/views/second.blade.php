@@ -1,0 +1,1 @@
+<a href="/post">Go Post</a>
