@@ -13,7 +13,7 @@ return new class extends Migration {
         Schema::create('libraries', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('em_id');
-            $table->foreign('em_id')->references('id')->on('employe')
+            $table->foreign('em_id')->references('id')->on('employes')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->string('book');

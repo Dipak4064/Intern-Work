@@ -10,10 +10,11 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('employe', function (Blueprint $table) {
+        Schema::create('employes', function (Blueprint $table) {
             $table->id();
             $table->string('name', 30);
             $table->string('email', 40)->unique()->nullable();
+            $table->timestamps();
         });
     }
 
