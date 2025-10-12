@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\studentController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -21,3 +22,5 @@ Route::controller(UserController::class)->group(function () {
 });
 
 Route::view('/newuser', 'newForm');
+
+Route::get('/students', [StudentController::class, 'showStudents']);
