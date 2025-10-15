@@ -7,7 +7,7 @@
                 <h3 class="mb-0">Sign In</h3>
             </div>
             <div class="card-body">
-                <form action="" method="POST">
+                <form action="{{ route('signin.store') }}" method="POST">
                     @csrf
                     <div class="mb-3">
                         <label for="email" class="form-label">Email address</label>
@@ -24,7 +24,18 @@
                     </div>
                 </form>
             </div>
-            <div class="card-footer text-center bg-light">
+            @if($errors->any())
+                <div class="card-footer text-body-secondary">
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li class="text-danger">{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            @endif
+            <div class="text-center">
                 <small>Don't have an account? <a href="/signup">sign up here</a></small>
             </div>
         </div>

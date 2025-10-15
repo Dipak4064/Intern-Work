@@ -3,28 +3,34 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SigninController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         return view('signin');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         //
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $credentials = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|string',
+        ]);
+        if (Auth::attempt($credentials)) {
+            if (Auth::check()) {
+                return view('dashboard');
+            }
+        }
+
+        return back()->withErrors([
+            'loginerr' => 'The provided credentials do not match',
+        ])->onlyInput('loginerr');
     }
 
     /**
@@ -32,7 +38,7 @@ class SigninController extends Controller
      */
     public function show(string $id)
     {
-        //
+
     }
 
     /**
@@ -56,6 +62,5 @@ class SigninController extends Controller
      */
     public function destroy(string $id)
     {
-        //
     }
 }

@@ -19,18 +19,27 @@
                         <a class="nav-link fs-5" href="#">Learn</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link fs-5" href="#">Pricing</a>
+                        <a class="nav-link fs-5" href="/getprice">Pricing</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link fs-5" href="/signin">Sign In</a>
                     </li>
+                    @can('isloggedin')
+                        <li class="nav-item">
+                            <a class="nav-link fs-5" href="{{ route('dashboard') }}">
+                                <i class="fas fa-user"></i>
+                            </a>
+                        </li>
+                    @endcan
+
+                    @cannot('isloggedin')
                     <li class="nav-item">
                         <a class="fs-5 px-3 py-2 text-white bg-primary rounded-4" href="/signup"
                             style="transition: 0.3s; text-decoration: none;">
                             Sign Up
                         </a>
                     </li>
-
+                    @endcannot
                 </ul>
             </div>
         </div>

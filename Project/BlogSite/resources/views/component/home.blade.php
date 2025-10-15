@@ -15,6 +15,9 @@
     <header>
         @include('component.nav')
     </header>
+    <div class="searchcon">
+        @yield('search-section')
+    </div>
     <main>
         @yield('main-section')
     </main>

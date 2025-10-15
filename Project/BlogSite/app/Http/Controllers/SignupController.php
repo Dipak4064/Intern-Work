@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Resource;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class SignupController extends Controller
@@ -28,37 +28,48 @@ class SignupController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:users,email',
+            'password' => 'required|string|confirmed',
+        ]);
+        // $user['password'] = bcrypt($user['password']); //we can use the casts() in models file for hashed password
+        $user = User::create($user);
+        if($user){
+            return redirect()->route('signin.index');
+        }else{
+            return back()->withInput();
+        }
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Resource $resource)
+    public function show(Request $request)
     {
         //
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified Request 
      */
-    public function edit(Resource $resource)
+    public function edit(Request $request)
     {
         //
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified Request  storage.
      */
-    public function update(Request $request, Resource $resource)
+    public function update(Request $request)
     {
         //
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified Request  storage.
      */
-    public function destroy(Resource $resource)
+    public function destroy(Request $request)
     {
         //
     }
