@@ -1,69 +1,118 @@
 @extends('component.home')
-@section('title', 'pricing section')
-
+@section('title', 'Pricing Plans')
 @section('main-section')
-    <div class="container mt-4">
-        <div class="row">
-            <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                    <img src="https://britenet.eu/content/uploads/2024/04/Machine-learning-5-questions.jpg"
-                        class="card-img-top" alt="Post Image" style="height:300px;object-fit:cover;">
-                    <div class="card-body">
-                        <h5 class="card-title">New Post</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">By John Doe</h6>
-                        <p class="card-text text-wrap"
-                            style="line-height: 1.5; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical;">
-                            Technology continues to evolve at an unprecedented pace in today's digital world.
-                            Artificial intelligence and machine learning are transforming how we work and live.
-                        </p>
-                        <div class="d-flex gap-5">
-                            <a href="#" class="btn btn-primary">Read More</a>
-                            <a href="#" class="btn btn-primary">save</a>
-                            <a href="#" class="btn btn-success">Buy Now</a>
+    <section class="hero">
+        <div class="container text-center">
+            <h1 class="fw-bold" style="font-size:2rem">Pick Best The Plan</h1>
+            <p class="text-muted mb-5">Take your desired plan to get access to our content easily, we like to offer
+                special license offer to our users.</p>
+
+            <div class="row g-4 justify-content-center">
+                <!-- Card 1 -->
+                <div class="col-12 col-md-6 col-lg-4 d-flex">
+                    <div class="pricing-card w-100">
+                        <div>
+                            <h5 class="text-center pricing-title">BASIC</h5>
+                            <div class="accent"></div>
+
+                            <div class="text-center mt-4">
+                                <div class="price">Rs 100</div>
+                                <small>Per Month</small>
+                            </div>
+
+                            <hr class="my-3">
+
+                            <ul class="feature-list">
+                                <li><i class="bi bi-check-circle-fill text-info"></i> All Features</li>
+                                <li><i class="bi bi-check-circle-fill text-info"></i> Chat Support</li>
+                                <li><i class="bi bi-check-circle-fill text-info"></i> 50 Audio & Video Calls Free</li>
+                            </ul>
+                        </div>
+
+                        <div class="text-center">
+                            <form action="{{ route('subscribe') }}" method="post">
+                                @csrf
+                                <input type="hidden" name="plan" value="month">
+                                <input type="hidden" name="amount" value="200">
+                                <input type="hidden" name="pid" value="{{ time() }}">
+                                <button class="btn btn-info w-100 select-btn text-white" type="submit">SELECT PLAN</button>
+                            </form>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                    <img src="https://britenet.eu/content/uploads/2024/04/Machine-learning-5-questions.jpg"
-                        class="card-img-top" alt="Post Image" style="height:300px;object-fit:cover;">
-                    <div class="card-body">
-                        <h5 class="card-title">New Post</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">By John Doe</h6>
-                        <p class="card-text text-wrap"
-                            style="line-height: 1.5; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical;">
-                            Sustainable development is crucial for our planet's future wellbeing and prosperity.
-                            Green technologies are revolutionizing industries across the globe today.
-                        </p>
-                        <div class="d-flex gap-5">
-                            <a href="#" class="btn btn-primary">Read More</a>
-                            <a href="#" class="btn btn-primary">save</a>
-                            <a href="#" class="btn btn-success">Buy Now</a>
+
+                <!-- Card 2 -->
+                <div class="col-12 col-md-6 col-lg-4 d-flex">
+                    <div class="pricing-card w-100">
+                        <div>
+                            <h5 class="text-center pricing-title">STANDARD</h5>
+                            <div class="accent"></div>
+
+                            <div class="text-center mt-4">
+                                <div class="price">Rs 1,000</div>
+                                <small>Per Year</small>
+                            </div>
+
+                            <hr class="my-3">
+
+                            <ul class="feature-list">
+                                <li><i class="bi bi-check-circle-fill text-info"></i> All Features</li>
+                                <li><i class="bi bi-check-circle-fill text-info"></i> Chat Support</li>
+                                <li><i class="bi bi-check-circle-fill text-info"></i> HD Quality</li>
+                                <li><i class="bi bi-check-circle-fill text-info"></i> Vat Features</li>
+                                <li><i class="bi bi-check-circle-fill text-info"></i> 50 Audio & Video Calls Free</li>
+                            </ul>
+                        </div>
+
+                        <div class="text-center">
+                            <form action="{{ route('subscribe') }}" method="post">
+                                @csrf
+                                <input type="hidden" name="plan" value="year">
+                                <input type="hidden" name="amount" value="1000">
+                                <input type="hidden" name="pid" value="{{ time() }}">
+                                <button class="btn btn-info w-100 select-btn text-white" type="submit">SELECT PLAN</button>
+                            </form>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                    <img src="https://britenet.eu/content/uploads/2024/04/Machine-learning-5-questions.jpg"
-                        class="card-img-top" alt="Post Image" style="height:300px;object-fit:cover;">
-                    <div class="card-body">
-                        <h5 class="card-title">New Post</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">By John Doe</h6>
-                        <p class="card-text text-wrap"
-                            style="line-height: 1.5; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical;">
-                            Digital transformation has reshaped the way businesses operate and compete globally.
-                            Cloud computing enables organizations to scale efficiently and reduce operational costs.
-                        </p>
-                        <div class="d-flex gap-5">
-                            <a href="#" class="btn btn-primary">Read More</a>
-                            <a href="#" class="btn btn-primary">save</a>
-                            <a href="#" class="btn btn-success">Buy Now</a>
+
+                <!-- Card 3 -->
+                <div class="col-12 col-md-6 col-lg-4 d-flex">
+                    <div class="pricing-card w-100">
+                        <div>
+                            <h5 class="text-center pricing-title">PREMIUM</h5>
+                            <div class="accent"></div>
+
+                            <div class="text-center mt-4">
+                                <div class="price">Rs 2,000</div>
+                                <small>Unlimited</small>
+                            </div>
+
+                            <hr class="my-3">
+
+                            <ul class="feature-list">
+                                <li><i class="bi bi-check-circle-fill text-info"></i> All Features</li>
+                                <li><i class="bi bi-check-circle-fill text-info"></i> Chat Support</li>
+                                <li><i class="bi bi-check-circle-fill text-info"></i> Vat Features</li>
+                                <li><i class="bi bi-check-circle-fill text-info"></i> Ultra HD Quality</li>
+                                <li><i class="bi bi-check-circle-fill text-info"></i> Unlimited Users</li>
+                                <li><i class="bi bi-check-circle-fill text-info"></i> Unlimited Audio & Video Call</li>
+                            </ul>
+                        </div>
+
+                        <div class="text-center">
+                            <form action="{{ route('subscribe') }}" method="post">
+                                @csrf
+                                <input type="hidden" name="plan" value="premium">
+                                <input type="hidden" name="amount" value="2000">
+                                <input type="hidden" name="pid" value="{{ time() }}">
+                                <button class="btn btn-info w-100 select-btn text-white" type="submit">SELECT PLAN</button>
+                            </form>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
-    </div>
+    </section>
 @endsection

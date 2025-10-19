@@ -1,5 +1,5 @@
 body {
-    background: #F8F9FA;
+    background: #f8f9fa;
     font-family: "Poppins", sans-serif;
 }
 
@@ -55,3 +55,96 @@ body {
 .btn-sign:hover {
     background: #084298;
 }
+
+/***** this for pricing page *****/
+.hero {
+    padding: 6rem 0 4rem;
+    position: relative;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(239, 246, 250, 0.68);
+    pointer-events: none;
+}
+
+.hero .container {
+    position: relative;
+    z-index: 2;
+}
+
+/* Pricing card style */
+.pricing-card {
+    border: 0;
+    border-radius: 0.6rem;
+    box-shadow: 0 10px 30px rgba(25, 40, 55, 0.08);
+    padding: 2rem;
+    background: #ffffffcc;
+    min-height: 420px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.pricing-title {
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+
+.price {
+    font-size: 48px;
+    font-weight: 800;
+    margin-top: 0.5rem;
+}
+
+.price small {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #6b6b6b;
+    margin-top: 0.25rem;
+}
+
+.feature-list {
+    margin-top: 1rem;
+    margin-bottom: 1.25rem;
+    list-style: none;
+    padding: 0;
+}
+
+.feature-list li {
+    display: flex;
+    gap: 0.6rem;
+    align-items: flex-start;
+    margin-bottom: 0.6rem;
+    color: #4a4a4a;
+    font-size: 0.95rem;
+}
+
+.accent {
+    background: linear-gradient(180deg, #06c1cf, #14b7c8);
+    /* turquoise accent */
+    width: 48px;
+    height: 14px;
+    border-radius: 2px;
+    margin: 0.6rem auto 0;
+}
+
+.select-btn {
+    border-radius: 0.45rem;
+    padding: 0.8rem 1rem;
+    font-weight: 700;
+    box-shadow: 0 6px 18px rgba(20, 183, 200, 0.18);
+}
+
+/* Responsive: stack on small screens */
+@media (max-width: 991.98px) {
+    .pricing-card {
+        min-height: auto;
+        margin-bottom: 1.25rem;
+    }
+}
+
+/***** End Section *****/

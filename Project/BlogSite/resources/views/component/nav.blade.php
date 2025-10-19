@@ -19,6 +19,9 @@
                         <a class="nav-link fs-5" href="#">Learn</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link fs-5 fw-bold" href="{{ route('extra.features') }}">Extra features</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link fs-5" href="/getprice">Pricing</a>
                     </li>
                     <li class="nav-item">

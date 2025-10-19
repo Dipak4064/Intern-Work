@@ -24,6 +24,10 @@
                             <i class="fa-solid fa-bell me-2"></i>Notifications
                         </a>
                         @can('isadmin')
+                            <a href="{{ route('trash.index') }}" class="btn btn-outline-success rounded-pill px-4">
+                                <i class="fa-solid fa-trash"></i>
+                                Trash Bin
+                            </a>    
                             <a href="{{ route('admin.index') }}" class="btn btn-outline-success rounded-pill px-4">
                                 <i class="fa-solid fa-user-shield me-2"></i>
                                 Admin Panel
