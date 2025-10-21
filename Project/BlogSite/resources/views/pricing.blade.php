@@ -1,6 +1,11 @@
 @extends('component.home')
 @section('title', 'Pricing Plans')
 @section('main-section')
+    @if(session('message'))
+        <div class="alert alert-primary text-center">
+            {{ session('message') }}
+        </div>
+    @endif
     <section class="hero">
         <div class="container text-center">
             <h1 class="fw-bold" style="font-size:2rem">Pick Best The Plan</h1>

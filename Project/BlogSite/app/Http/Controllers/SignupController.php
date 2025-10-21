@@ -4,9 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Services\WelcomeEmailInterface;
 
 class SignupController extends Controller
 {
+    protected $service;
+    public function __construct(WelcomeEmailInterface $service)
+    {
+        $this->service = $service;
+    }
     /**
      * Display a listing of the resource.
      */
@@ -27,16 +33,17 @@ class SignupController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
+    {      
         $user = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255|unique:users,email',
             'password' => 'required|string|confirmed',
         ]);
-        // $user['password'] = bcrypt($user['password']); //we can use the casts() in models file for hashed password
-        $user = User::create($user);
+        $user = User::create($user);        
+
         if($user){
-            return redirect()->route('signin.index');
+            $this->service->sendWelcomeEmail($user->name, $user->email, 'Welcome Email!');
+            return redirect()->route('signin.index')->with('message', 'Account created successfully! Please sign in.');
         }else{
             return back()->withInput();
         }

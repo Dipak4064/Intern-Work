@@ -3,17 +3,20 @@
 use App\Http\Controllers\SigninController;
 use App\Http\Controllers\SignupController;
 use App\Http\Controllers\UserController;
+use App\Http\Middleware\checkPayment;
 use App\Models\User;
 use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\isAdmin;
+use App\Http\Middleware\isLoggedin;
 
 Route::get('/', [UserController::class, 'landing'])->name('landing');
 
 Route::get('/getprice', function () {
     return view('pricing');
-});
+})->name('getprice');
 
 Route::get('/logout', function () {
     Auth::logout();
@@ -45,22 +48,34 @@ Route::get('updatepost/{id}', function ($id) {
 })->name('updatepost');
 
 Route::PUT('postedit/{id}', [UserController::class, 'edit'])->name('post.update');
-Route::delete('destroypost/{id}', [UserController::class, 'destroy'])->name('post.destroy')->middleware(['can:isloggedin', 'can:isadmin']);
+Route::delete('destroypost/{id}', [UserController::class, 'destroy'])->name('post.destroy')->middleware(['can:isloggedin']);
 Route::get('/trash/index', [UserController::class, 'trash'])->name('trash.index')->middleware('can:isadmin');
 Route::get('/post/restore/{id}', [UserController::class, 'restore'])->name('post.restore')->middleware('can:isadmin');
 Route::delete('/permanent/destroy/{id}', [UserController::class, 'permanentDestroy'])->name('permanent.destroy')->middleware('can:isadmin');
 Route::get('/post/restore/{id}', [UserController::class, 'restore'])->name('post.restore')->middleware('can:isadmin');
 
 Route::get('/admin', [UserController::class, 'adminIndex'])->name('admin.index')->middleware('can:isadmin');
-Route::get('/search',[UserController::class,'search'])->name('search');
+Route::get('/search', [UserController::class, 'search'])->name('search');
 
-Route::post('/subscribe', [UserController::class, 'subscribe'])->name('subscribe')->middleware('can:isloggedin');
+Route::post('/subscribe', [UserController::class, 'subscribe'])->name('subscribe')->middleware(isLoggedin::class);
 Route::get('paymentSuccess', [UserController::class, 'paymentSuccess'])->name('payment.success');
 Route::get('paymentFailure', [UserController::class, 'paymentFailure'])->name('payment.failure');
-Route::post('/try-again',[UserController::class,'subscribe'])->name('payment.retry')->middleware('can:isloggedin');
-
-
+Route::post('/try-again', [UserController::class, 'subscribe'])->name('payment.retry')->middleware('can:isloggedin');
 
 Route::get('/extra-features', function () {
     return view('extra_features');
-})->name('extra.features')->middleware('can:isloggedin');
+})->name('extra.features');
+
+Route::get('/chat', function () {
+    return view('chat');
+})->name('chat')->middleware([isLoggedin::class, checkPayment::class]);
+
+
+Route::get('/video', function () {
+    return view('video');
+})->name('video')->middleware([isLoggedin::class, checkPayment::class]);
+
+
+Route::get('/error', function () {
+    return view('errors.error');
+})->name('error');

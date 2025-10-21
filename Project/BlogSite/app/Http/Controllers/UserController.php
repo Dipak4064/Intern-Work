@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Subscription;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
@@ -39,7 +40,6 @@ class UserController extends Controller
 
         return redirect()->route('dashboard')->with('success', 'Post created successfully!');
     }
-
     public function yourposts()
     {
         $posts = Post::where('user_id', Auth::id())->get();
@@ -96,6 +96,10 @@ class UserController extends Controller
         $post = Post::findOrFail($id);
         $post->deleted_by = Auth::id();
         $post->deleted_at = now();
+        if($post->user_id !== Auth::id() && !Gate::allows('isadmin')) {
+            return redirect()->route('posts.index')->with('error', 'Unauthorized action.');
+        }
+        $post->delete();
         $post->save();
         return redirect()->route('posts.index')->with('success', 'Post deleted successfully!');
     }
@@ -196,13 +200,16 @@ class UserController extends Controller
     public function paymentSuccess(Request $request)
     {
         $user = Subscription::where('user_id', Auth::id())->get();
-        $payment = Subscription::where('user_id', Auth::id())->get();        
+        $payment = Subscription::where('user_id', Auth::id())->get();
         $payment[0]->status = 'payed';
         $amount = $payment[0]->amount;
 
         if ($amount > 0 || $payment[0]->status == 'payed') {
             $payment[0]->total_amount += $amount;
         }
+        $user = User::find(Auth::id());
+        $user->payment_status = 'payed';
+        $user->save();
         $payment[0]->save();
         $pid = $payment[0]->pid;
         return view('payment_success', compact('amount', 'pid'));
@@ -216,5 +223,4 @@ class UserController extends Controller
         $pid = $payment->pid;
         return view('payment_failed', compact('amount', 'pid'));
     }
-
 }

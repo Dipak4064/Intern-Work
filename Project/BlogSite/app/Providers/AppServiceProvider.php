@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Services\sendWelcomeEmail;
+use App\Services\WelcomeEmailInterface;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
@@ -13,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->bind(WelcomeEmailInterface::class, SendWelcomeEmail::class);
     }
 
     /**
@@ -25,7 +27,8 @@ class AppServiceProvider extends ServiceProvider
             return Auth::check();
         });
         Gate::define('isadmin', function () {
-            return Auth::check() && Auth::user()->role === 'admin';
+            $user = Auth::user();
+            return $user->role === 'admin';
         });
     }
 }
