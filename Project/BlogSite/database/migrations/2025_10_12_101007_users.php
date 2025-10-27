@@ -12,10 +12,12 @@ return new class extends Migration {
             $table->string('name');
             $table->string('username')->unique()->nullable();
             $table->string('email')->unique();
+            $table->string('email_verified_status')->default('pending');
             $table->string('password');
             $table->string('role')->default('user');
             $table->string('profile_image')->nullable();
             $table->text('bio')->nullable();
+            $table->timestamp('email_verified_at')->nullable();
             $table->timestamps();
         });
     }

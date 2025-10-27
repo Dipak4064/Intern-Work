@@ -4,5 +4,5 @@ namespace App\Services;
 
 interface WelcomeEmailInterface
 {
-    public function sendWelcomeEmail($username, $email, $subject);
+    public function sendWelcomeEmail($username, $email, $subject, $link);
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Services\WelcomeEmailInterface;
+use Illuminate\Support\Facades\Crypt;
 
 class SignupController extends Controller
 {
@@ -33,19 +34,37 @@ class SignupController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {      
-        $user = $request->validate([
+    {
+        $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255|unique:users,email',
+            'email' => 'required|email|max:255|indisposable|unique:users,email',
             'password' => 'required|string|confirmed',
+            'g-recaptcha-response' => ['required', new \App\Rules\InReCaptcha()],
         ]);
-        $user = User::create($user);        
+        $link = Crypt::encryptString($validated['email']);
+        $link = url('/verify-email/' . $link);
+        $user = User::create([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'password' => $validated['password'],
+        ]);
 
-        if($user){
-            $this->service->sendWelcomeEmail($user->name, $user->email, 'Welcome Email!');
+        if ($user) {
+            $this->service->sendWelcomeEmail($user->name, $user->email, 'Welcome Email!', $link);
             return redirect()->route('signin.index')->with('message', 'Account created successfully! Please sign in.');
-        }else{
+        } else {
             return back()->withInput();
+        }
+    }
+    function verifyEmail($token)
+    {
+        $email = Crypt::decryptString($token);
+        $user = User::where('email', $email)->latest()->first();
+        if ($user) {
+            $user->email_verified_at = now();
+            $user->email_verified_status = 'verified';
+            $user->save();
+            return redirect()->route('signin.index')->with('message', 'Email verified successfully! You can now sign in.');
         }
     }
 

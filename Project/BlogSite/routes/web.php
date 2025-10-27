@@ -3,6 +3,7 @@
 use App\Http\Controllers\SigninController;
 use App\Http\Controllers\SignupController;
 use App\Http\Controllers\UserController;
+use App\Http\Middleware\checkExpiryDate;
 use App\Http\Middleware\checkPayment;
 use App\Models\User;
 use App\Models\Post;
@@ -29,6 +30,7 @@ Route::get('/dashboard', function () {
 
 Route::resource('signup', SignupController::class);
 Route::resource('signin', SigninController::class);
+Route::post('/profile', [UserController::class, 'updateProfile'])->name('profile.update')->middleware('can:isloggedin');
 
 Route::get('/createpost', function () {
     return view('createpost');
@@ -68,14 +70,15 @@ Route::get('/extra-features', function () {
 
 Route::get('/chat', function () {
     return view('chat');
-})->name('chat')->middleware([isLoggedin::class, checkPayment::class]);
-
+})->name('chat')->middleware([isLoggedin::class, checkExpiryDate::class]);
 
 Route::get('/video', function () {
     return view('video');
-})->name('video')->middleware([isLoggedin::class, checkPayment::class]);
+})->name('video')->middleware([isLoggedin::class, checkExpiryDate::class]);
 
 
 Route::get('/error', function () {
     return view('errors.error');
 })->name('error');
+
+Route::get('/verify-email/{token}', [SignupController::class, 'verifyEmail'])->name('verify.email');

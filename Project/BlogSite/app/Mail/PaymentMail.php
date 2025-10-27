@@ -9,22 +9,26 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class WelcomeEmail extends Mailable
+class PaymentMail extends Mailable
 {
     use Queueable, SerializesModels;
 
     /**
      * Create a new message instance.
      */
-    public $username;
-    public $subject;
-    public $link;
+    protected $messageStatus;
+    protected $name;
+    protected $pid;
+    protected $amount;
+    protected $plan;
 
-    public function __construct($username, $subject, $link)
+    public function __construct($name, $pid, $amount, $messageStatus, $plan)
     {
-        $this->username = $username;
-        $this->subject = $subject;
-        $this->link = $link;
+        $this->name = $name;
+        $this->messageStatus = $messageStatus;
+        $this->pid = $pid;
+        $this->amount = $amount;
+        $this->plan = $plan;
     }
 
     /**
@@ -33,7 +37,7 @@ class WelcomeEmail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: $this->subject,
+            subject: 'Payment Mail',
         );
     }
 
@@ -43,7 +47,14 @@ class WelcomeEmail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mail.welcome',
+            view: 'mail.PaymentMail',
+            with: [
+                'name' => $this->name,
+                'messageStatus' => $this->messageStatus,
+                'pid' => $this->pid,
+                'amount' => $this->amount,
+                'plan' => $this->plan,
+            ],
         );
     }
 

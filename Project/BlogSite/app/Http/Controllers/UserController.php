@@ -9,12 +9,15 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\PaymentMail;
 
 class UserController extends Controller
 {
     public function landing()
     {
-        $posts = Post::all();
+        $posts = Post::paginate(6);
         return view('landing', compact('posts'));
     }
     public function store(Request $request)
@@ -39,6 +42,31 @@ class UserController extends Controller
         ]);
 
         return redirect()->route('dashboard')->with('success', 'Post created successfully!');
+    }
+    public function updateProfile(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'string|max:255',
+            'username' => 'string|max:255',
+            'bio' => 'nullable|string|max:500',
+            'profile_image' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
+        ]);
+
+        $user = User::find(Auth::id());
+        $user->name = $validated['name'];
+        $user->username = $validated['username'];
+        $user->bio = $validated['bio'];
+
+        if ($request->hasFile('profile_image')) {
+            // Delete old profile image if exists
+            if ($user->profile_image && Storage::disk('public')->exists($user->profile_image)) {
+                Storage::disk('public')->delete($user->profile_image);
+            }
+            // Store new profile image
+            $user->profile_image = $request->file('profile_image')->store('profiles', 'public');
+        }
+        $user->save();
+        return redirect()->route('dashboard')->with('success', 'Profile updated successfully!');
     }
     public function yourposts()
     {
@@ -96,7 +124,7 @@ class UserController extends Controller
         $post = Post::findOrFail($id);
         $post->deleted_by = Auth::id();
         $post->deleted_at = now();
-        if($post->user_id !== Auth::id() && !Gate::allows('isadmin')) {
+        if ($post->user_id !== Auth::id() && !Gate::allows('isadmin')) {
             return redirect()->route('posts.index')->with('error', 'Unauthorized action.');
         }
         $post->delete();
@@ -143,11 +171,13 @@ class UserController extends Controller
             'amount' => 'required|numeric',
         ]);
 
-        $date = new \DateTime();
+        $date = Carbon::now();
         if ($request->input('plan') === 'premium') {
             $endDate = null;
+        } else if ($request->input('plan') === 'month') {
+            $endDate = Carbon::now()->addMonth();
         } else {
-            $endDate = (clone $date)->modify('+1 month')->format('Y-m-d H:i:s');
+            $endDate = Carbon::now()->addYear();
         }
         $user = Subscription::where('user_id', Auth::id())->get();
         if (!$user->isEmpty()) {
@@ -156,7 +186,7 @@ class UserController extends Controller
             $user[0]->pid = $request->input('pid');
             $user[0]->amount = $request->input('amount');
             $user[0]->status = 'initialized';
-            $user[0]->start_date = $date->format('Y-m-d H:i:s');
+            $user[0]->start_date = $date;
             $user[0]->end_date = $endDate;
             $user[0]->save();
         } else {
@@ -166,10 +196,9 @@ class UserController extends Controller
                 'pid' => $request->input('pid'),
                 'amount' => $request->input('amount'),
                 'status' => 'initialized',
-                'start_date' => $date->format('Y-m-d H:i:s'),
+                'start_date' => $date,
                 'end_date' => $endDate,
             ]);
-
         }
 
         $amount = $request->input('amount');
@@ -211,9 +240,14 @@ class UserController extends Controller
         $user->payment_status = 'payed';
         $user->save();
         $payment[0]->save();
+        $name = $user->name;
+        $message = 'Payment Successful';
+        $plan = $payment[0]->plan;
+        Mail::to($user->email)->send(new PaymentMail($name, $payment[0]->pid, $amount, $message, $plan));
         $pid = $payment[0]->pid;
         return view('payment_success', compact('amount', 'pid'));
     }
+
     public function paymentFailure(Request $request)
     {
         $payment = Subscription::where('user_id', Auth::id())->latest()->first();

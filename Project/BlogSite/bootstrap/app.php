@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\checkExpiryDate;
 use App\Http\Middleware\checkPayment;
 use App\Http\Middleware\isAdmin;
 use App\Http\Middleware\isLoggedin;
@@ -17,6 +18,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias(['isLoggedin' => isLoggedin::class]);
         $middleware->alias(['isAdmin' => isAdmin::class]);
         $middleware->alias(['checkPayment' => checkPayment::class]);
+        $middleware->alias(['checkExpiryDate' => checkExpiryDate::class]);
     })
 
     ->withExceptions(function (Exceptions $exceptions): void {

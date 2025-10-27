@@ -9,7 +9,6 @@
 </head>
 
 <body>
-    <h1>{{ $subject }}</h1>
     <h2>{{ $username }} Welcome to Our Community! 👋</h2>
 
     <p>We’re so excited to have you join us at <strong>Blog Site</strong>.</p>
@@ -31,8 +30,10 @@
     </p>
 
     <p>Welcome aboard and enjoy the journey! 🚀</p>
+    <p>Verify your email address to get started. <a href="{{ $link }}">Click here</a>.</p>
 
     <p>— The <strong>Blog Site</strong> Team</p>
+
 
 </body>
 

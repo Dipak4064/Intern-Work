@@ -18,6 +18,11 @@ class SigninController extends Controller
     }
     public function store(Request $request)
     {
+        $validated = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|string',
+            'g-recaptcha-response' => ['required', new \App\Rules\ReCaptcha()],
+        ]);
         $credentials = $request->validate([
             'email' => 'required|email',
             'password' => 'required|string',
@@ -27,7 +32,6 @@ class SigninController extends Controller
                 return view('dashboard');
             }
         }
-
         return back()->withErrors([
             'loginerr' => 'The provided credentials do not match',
         ])->onlyInput('loginerr');
