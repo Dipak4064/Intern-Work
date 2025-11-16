@@ -77,21 +77,21 @@ class UserController extends Controller
     public function showpost($id)
     {
         $post = Post::findOrFail($id);
+        $user = User::find(Auth::id());
         Gate::authorize('isloggedin');
-        if ($post->user_id !== Auth::id() && !Gate::allows('isadmin')) {
+        if ($post->user_id !== Auth::id() && !Gate::allows('isadmin-or-editor')) {
             abort(403, 'Unauthorized action.');
         }
         return view('singlepost', compact('post'));
     }
-
     public function edit(Request $request, $id)
     {
         // Find the post
         $post = Post::findOrFail($id);
-
+        $user = User::find(Auth::id());
         // Authorization: only owner or admin
         Gate::authorize('isloggedin');
-        if ($post->user_id !== Auth::id() && !Gate::allows('isadmin')) {
+        if ($post->user_id !== Auth::id() && !Gate::allows('isadmin-or-editor')) {
             abort(403, 'Unauthorized action.');
         }
 
@@ -124,7 +124,8 @@ class UserController extends Controller
         $post = Post::findOrFail($id);
         $post->deleted_by = Auth::id();
         $post->deleted_at = now();
-        if ($post->user_id !== Auth::id() && !Gate::allows('isadmin')) {
+        $user = User::find(Auth::id());
+        if ($post->user_id !== Auth::id() && !Gate::allows('isadmin-or-editor')) {
             return redirect()->route('posts.index')->with('error', 'Unauthorized action.');
         }
         $post->delete();
@@ -150,7 +151,6 @@ class UserController extends Controller
     }
     public function adminIndex()
     {
-        Gate::authorize('isadmin');
         $posts = Post::all();
         return view('data', compact('posts'));
     }
@@ -232,13 +232,13 @@ class UserController extends Controller
         $payment = Subscription::where('user_id', Auth::id())->get();
         $payment[0]->status = 'payed';
         $amount = $payment[0]->amount;
-
         if ($amount > 0 || $payment[0]->status == 'payed') {
             $payment[0]->total_amount += $amount;
         }
         $user = User::find(Auth::id());
         $user->payment_status = 'payed';
         $user->save();
+        $user->assignRole('subscriber');
         $payment[0]->save();
         $name = $user->name;
         $message = 'Payment Successful';
@@ -256,5 +256,16 @@ class UserController extends Controller
         $amount = $payment->amount;
         $pid = $payment->pid;
         return view('payment_failed', compact('amount', 'pid'));
+    }
+    function assignRolePermission(Request $request)
+    {
+        $validated = Request()->validate([
+            'user_id' => 'required|integer|exists:users,id',
+            'role' => 'required|string|exists:roles,name',
+        ]);
+        $user = User::find($validated['user_id']);
+        $user->syncRoles($validated['role']);
+        dd('sucessful');
+        return redirect()->route('role.permission')->with('success', 'Role and permissions assigned successfully!');
     }
 }

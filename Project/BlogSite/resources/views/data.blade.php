@@ -4,6 +4,7 @@
     <div class="container py-5">
         <h2 class="mb-4">Data Panel</h2>
         <a href="{{ route('logout') }}" class="btn btn-sm btn-primary me-2 mb-4">Log Out</a>
+        <a href="{{ route('role.permission') }}" class="btn btn-sm btn-info mb-4">Role & Permission</a>
         <a href="{{ route('dashboard') }}" class="btn btn-sm btn-success mb-4">Go Back</a>
         @if(session('error'))
                 <div class="alert alert-danger">
@@ -16,6 +17,7 @@
             {{ session('success') }}
         </div>
     @endif
+
     <div class="table-responsive">
         <table class="table table-bordered table-hover">
             <thead class="table-dark">
@@ -40,7 +42,6 @@
                         $user = \App\Models\User::find($post->user_id);
                         $name = $user ? $user->name : 'Unknown';
                     @endphp
-
                     <tr>
                         <th scope="row">{{ $post->id }}</th>
                         <td>{{ $name }}</td>

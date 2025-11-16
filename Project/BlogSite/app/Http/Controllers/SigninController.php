@@ -29,7 +29,9 @@ class SigninController extends Controller
         ]);
         if (Auth::attempt($credentials)) {
             if (Auth::check()) {
-                return view('dashboard');
+                $token = Auth::user()->createToken('auth_token');
+                $request->session()->regenerate();
+                return redirect()->intended('dashboard');
             }
         }
         return back()->withErrors([

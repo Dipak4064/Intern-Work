@@ -10,17 +10,10 @@ use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     */
     public function register(): void
     {
         $this->app->bind(WelcomeEmailInterface::class, SendWelcomeEmail::class);
     }
-
-    /**
-     * Bootstrap any application services.
-     */
     public function boot(): void
     {
         Gate::define('isloggedin', function () {
@@ -29,6 +22,12 @@ class AppServiceProvider extends ServiceProvider
         Gate::define('isadmin', function () {
             $user = Auth::user();
             return $user->role === 'admin';
+        });
+        Gate::define('editor', function ($user) {
+            return $user->hasRole('editor');
+        });
+        Gate::define('isadmin-or-editor', function ($user) {
+            return $user->hasRole('admin') || $user->hasRole('editor');
         });
     }
 }

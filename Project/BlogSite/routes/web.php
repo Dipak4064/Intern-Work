@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\isAdmin;
 use App\Http\Middleware\isLoggedin;
+use Spatie\Permission\Models\Role;
 
 Route::get('/', [UserController::class, 'landing'])->name('landing');
 
@@ -51,12 +52,13 @@ Route::get('updatepost/{id}', function ($id) {
 
 Route::PUT('postedit/{id}', [UserController::class, 'edit'])->name('post.update');
 Route::delete('destroypost/{id}', [UserController::class, 'destroy'])->name('post.destroy')->middleware(['can:isloggedin']);
-Route::get('/trash/index', [UserController::class, 'trash'])->name('trash.index')->middleware('can:isadmin');
-Route::get('/post/restore/{id}', [UserController::class, 'restore'])->name('post.restore')->middleware('can:isadmin');
-Route::delete('/permanent/destroy/{id}', [UserController::class, 'permanentDestroy'])->name('permanent.destroy')->middleware('can:isadmin');
-Route::get('/post/restore/{id}', [UserController::class, 'restore'])->name('post.restore')->middleware('can:isadmin');
+Route::get('/trash/index', [UserController::class, 'trash'])->name('trash.index')->middleware('can:isadmin-or-editor');
 
-Route::get('/admin', [UserController::class, 'adminIndex'])->name('admin.index')->middleware('can:isadmin');
+Route::get('/post/restore/{id}', [UserController::class, 'restore'])->name('post.restore')->middleware('can:isadmin-or-editor');
+Route::delete('/permanent/destroy/{id}', [UserController::class, 'permanentDestroy'])->name('permanent.destroy')->middleware('can:isadmin');
+// Route::get('/post/restore/{id}', [UserController::class, 'restore'])->name('post.restore')->middleware('can:isadmin');
+
+Route::get('/admin', [UserController::class, 'adminIndex'])->name('admin.index')->middleware(['can:isadmin-or-editor']);
 Route::get('/search', [UserController::class, 'search'])->name('search');
 
 Route::post('/subscribe', [UserController::class, 'subscribe'])->name('subscribe')->middleware(isLoggedin::class);
@@ -82,3 +84,12 @@ Route::get('/error', function () {
 })->name('error');
 
 Route::get('/verify-email/{token}', [SignupController::class, 'verifyEmail'])->name('verify.email');
+
+
+Route::get('/roleform', function () {
+    $roles = Role::all();
+    $users = User::all();
+    return view('roleForm', compact('roles', 'users'));
+})->name('role.permission')->middleware('can:isadmin');
+
+Route::post('/assign-role-permission', [UserController::class, 'assignRolePermission'])->name('roles.assign')->middleware('can:isadmin');

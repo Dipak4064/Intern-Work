@@ -12,7 +12,6 @@
                     @else
                         <i class="fa-solid fa-user-circle fa-7x mb-3"></i>
                     @endif
-
                     <h4 class="fw-bold mb-1">{{ Auth::user()->name }}</h4>
                     <p class="text-light mb-1 small">{{ Auth::user()->email }}</p>
                     <p class="fw-semibold text-white-50 mb-1">{{ Auth::user()->username }}</p>
@@ -27,7 +26,6 @@
                         <i class="fa-solid fa-pen me-2"></i>Edit Profile
                     </a>
                 </div>
-
                 <div class="edit-profile col-md-4 bg-primary text-white text-center py-5 d-none">
                     @if(Auth::user()->profile_image)
                         <img src="{{ asset('storage/' . Auth::user()->profile_image) }}" alt="Profile Image"
@@ -56,8 +54,6 @@
                         </button>
                     </form>
                 </div>
-
-
                 <div class="col-md-8 p-4">
                     @if(session('success'))
                         <div class="alert alert-success alert-dismissible fade show m-0 " role="alert" id="success-alert">
@@ -98,6 +94,16 @@
                             <a href="{{ route('admin.index') }}" class="btn btn-outline-success rounded-pill px-4">
                                 <i class="fa-solid fa-user-shield me-2"></i>
                                 Admin Panel
+                            </a>
+                        @endcan
+                        @can('editor')
+                            <a href="{{ route('trash.index') }}" class="btn btn-outline-success rounded-pill px-4">
+                                <i class="fa-solid fa-trash"></i>
+                                Trash Bin
+                            </a>
+                            <a href="{{ route('admin.index') }}" class="btn btn-outline-success rounded-pill px-4">
+                                <i class="fa-solid fa-user-pen me-2"></i>
+                                Editor Panel
                             </a>
                         @endcan
                         <a href="{{ route('logout') }}" class="btn btn-outline-danger rounded-pill px-4">
